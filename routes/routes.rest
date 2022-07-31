@@ -1,0 +1,49 @@
+### GET all
+
+GET http://localhost:3000/api/music
+
+### GET by Id
+
+GET http://localhost:3000/api/music/62dd87e299b21a641d257de6
+
+### GET by Id Bad Request
+
+GET http://localhost:3000/api/music/62dd815368aebd96cdcfbb8f
+
+### Create
+POST http://localhost:3000/api/music
+Content-Type: application/json
+
+{
+    "name": "Music 1",
+    "youtubeEmbedId": "assdssfe",
+    "instagramId": 1234567
+}
+
+### Create Bad Request
+
+POST http://localhost:3000/api/music
+Content-Type: application/json
+
+{
+    "name": "Music 1"
+}
+
+### PATCH By Id
+PATCH http://localhost:3000/api/music/62dd87e299b21a641d257de6
+Content-Type: application/json
+
+{
+    "description": "Music 2"
+}
+
+### PATCH by Id Bad Request
+
+PATCH http://localhost:3000/api/music/62dd815368aebd96cdcfbb8f
+
+### DELETE By Id
+DELETE http://localhost:3000/api/music/62dd87e299b21a641d257de6
+
+### DELETE by Id Bad Request
+
+DELETE http://localhost:3000/api/music/62dd815368aebd96cdcfbb8f
