@@ -21,8 +21,15 @@ db.once('open', () => console.log('Connected to Database'));
 
 // Enable CORS
 const cors = require('cors');
+const whitelist = ["https://adrieltheexplorer.com", "http://localhost:3000"];
 app.use(cors({
-  origin: "http://localhost:3000"
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
 }));
 
 // Use middleware to enable JSON parsing
