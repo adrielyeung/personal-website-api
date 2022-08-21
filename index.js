@@ -2,7 +2,7 @@ require('dotenv').config();
 
 // node.js environment in process object
 // Use environment variable PORT if possible, otherwise use 3000 (e.g. dev machine)
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 // Returns express function, used to create API handling requests
 const express = require('express');
@@ -18,6 +18,12 @@ const db = mongoose.connection;
 db.on('error', (error) => console.error(error));
 // Just once, when database connection is opened, log it
 db.once('open', () => console.log('Connected to Database'));
+
+// Enable CORS
+const cors = require('cors');
+app.use(cors({
+  origin: "http://localhost:3000"
+}));
 
 // Use middleware to enable JSON parsing
 app.use(express.json());

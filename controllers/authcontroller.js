@@ -26,7 +26,7 @@ exports.signup = (req, res) => {
 
 exports.signin = (req, res) => {
   User.findOne({
-    email: req.body.email
+    name: req.body.username
   })
   .exec((err, user) => {
     if (err) {
@@ -71,7 +71,7 @@ exports.signin = (req, res) => {
         user: {
           id: user._id,
           email: user.email,
-          fullName: user.fullName,
+          username: user.name,
         },
         message: "Login successful.",
         accessToken: token,

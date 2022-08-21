@@ -27,12 +27,37 @@ router.get('/:id', verifyJWTToken, checkUserExists, getMusic, (req, res) => {
     res.json(res.music);
 });
 
+// GET by name
+router.get('/name/:name', verifyJWTToken, checkUserExists, getMusicByName, (req, res) => {
+    if (!req.user) {
+        res.status(403)
+        .send({
+            message: "Unauthorised access, please login and try again with token."
+        });
+        return;
+    }
+    res.json(res.music);
+});
+
+// GET by Instagram Id
+router.get('/ig/:instagramId', verifyJWTToken, checkUserExists, getMusicByIgId, (req, res) => {
+    if (!req.user) {
+        res.status(403)
+        .send({
+            message: "Unauthorised access, please login and try again with token."
+        });
+        return;
+    }
+    res.json(res.music);
+});
+
 // Creating one
 router.post('/', verifyJWTToken, checkUserIsAdmin, async (req, res) => {
     const music = new Music({
         name: req.body.name,
         createDate: req.body.createDate,
-        youtubeEmbedId: req.body.youtubeEmbedId
+        youtubeEmbedId: req.body.youtubeEmbedId,
+        instagramId: req.body.instagramId
     });
 
     try {
@@ -123,6 +148,36 @@ async function getMusic(req, res, next) {
     let music;
     try {
         music = await Music.findById(req.params.id);
+        if (music == null) {
+            return res.status(404).json({ message: 'Cannot find music' });
+        }
+    } catch (err) {
+        return res.status(500).json({ message: err.message });
+    }
+
+    res.music = music;
+    next();
+}
+
+async function getMusicByName(req, res, next) {
+    let music;
+    try {
+        music = await Music.findOne({ name: req.params.name });
+        if (music == null) {
+            return res.status(404).json({ message: 'Cannot find music' });
+        }
+    } catch (err) {
+        return res.status(500).json({ message: err.message });
+    }
+
+    res.music = music;
+    next();
+}
+
+async function getMusicByIgId(req, res, next) {
+    let music;
+    try {
+        music = await Music.findOne({ instagramId: req.params.instagramId });
         if (music == null) {
             return res.status(404).json({ message: 'Cannot find music' });
         }
