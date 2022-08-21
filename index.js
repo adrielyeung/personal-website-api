@@ -21,13 +21,13 @@ db.once('open', () => console.log('Connected to Database'));
 
 // Enable CORS
 const cors = require('cors');
-const whitelist = ["https://adrieltheexplorer.com", "http://localhost:3000"];
+const whitelist = ["https://adrieltheexplorer.com", "https://uat.adrieltheexplorer.com", "http://localhost:3000"];
 app.use(cors({
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
+      callback(null, true)
     } else {
-      callback(new Error('Not allowed by CORS, origin: ' + origin));
+      callback(new Error('Not allowed by CORS, origin: ' + origin))
     }
   }
 }));
