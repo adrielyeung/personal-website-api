@@ -25,9 +25,9 @@ const whitelist = ["https://adrieltheexplorer.com", "https://uat.adrieltheexplor
 app.use(cors({
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
+      callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'))
+      callback(new Error('Not allowed by CORS, origin: ' + origin));
     }
   }
 }));
