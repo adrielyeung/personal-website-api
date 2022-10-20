@@ -1,6 +1,5 @@
 # personal-website-api
 Backend Express.js API to use with my personal website, connected to Mongo DB.
-Deployed on Heroku and accessible [here](https://adriel-personal-website-api.herokuapp.com/api).
 
 ## Authentication
 Uses JSON Web Token (JWT) for authentication. Connects to user DB.
